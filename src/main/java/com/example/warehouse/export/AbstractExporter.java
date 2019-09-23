@@ -2,13 +2,14 @@ package com.example.warehouse.export;
 
 import com.example.warehouse.Report;
 
+import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.List;
 
 public abstract class AbstractExporter {
 
     private final Report report;
-    private final PrintStream out;
+    private final OutputStream out;
 
     AbstractExporter(Report report, PrintStream out) {
         this.report = report;
@@ -25,15 +26,15 @@ public abstract class AbstractExporter {
         afterRecords(out);
     }
 
-    protected void beforeLabels(PrintStream out) {
+    protected void beforeLabels(OutputStream out) {
     }
 
-    protected abstract void handleLabels(PrintStream out, List<String> labels);
+    protected abstract void handleLabels(OutputStream out, List<String> labels);
 
-    protected void afterLabels(PrintStream out) {
+    protected void afterLabels(OutputStream out) {
     }
 
-    protected void beforeRecords(PrintStream out) {
+    protected void beforeRecords(OutputStream out) {
     }
 
     private void handleRecords() {
@@ -49,8 +50,8 @@ public abstract class AbstractExporter {
         }
     }
 
-    protected abstract void handleRecord(PrintStream out, List<String> records, boolean first, boolean last);
+    protected abstract void handleRecord(OutputStream out, List<String> records, boolean first, boolean last);
 
-    protected void afterRecords(PrintStream out) {
+    protected void afterRecords(OutputStream out) {
     }
 }

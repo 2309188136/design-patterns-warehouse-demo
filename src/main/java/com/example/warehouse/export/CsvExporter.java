@@ -2,6 +2,7 @@ package com.example.warehouse.export;
 
 import com.example.warehouse.Report;
 
+import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,18 +19,20 @@ public final class CsvExporter extends AbstractExporter {
     }
 
     @Override
-    protected void handleLabels(PrintStream out, List<String> labels) {
+    protected void handleLabels(OutputStream out, List<String> labels) {
         if (includeHeader) {
             printStrings(out, labels);
         }
     }
 
     @Override
-    protected void handleRecord(PrintStream out, List<String> records, boolean first, boolean last) {
+    protected void handleRecord(OutputStream out, List<String> records, boolean first, boolean last) {
         printStrings(out, records);
     }
 
-    private void printStrings(PrintStream out, List<String> records) {
-        out.println(records.stream().collect(Collectors.joining(SEPARATOR)));
+    private void printStrings(OutputStream out, List<String> records) {
+        PrintStream printOut = (PrintStream)out;
+        printOut.println(records.stream().collect(Collectors.joining(SEPARATOR)));
     }
+
 }

@@ -100,7 +100,7 @@ public final class Cli implements Runnable {
             System.exit(2);
         }
 
-        while (true) {
+        while (!Thread.currentThread().isInterrupted()) {
             displayMainMenu();
             try {
                 int mainMenuChoice = chooseMainMenuOption();
